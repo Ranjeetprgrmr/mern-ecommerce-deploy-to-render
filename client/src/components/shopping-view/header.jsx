@@ -8,7 +8,7 @@ import { DropdownMenu, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu
 import { AvatarFallback } from "@radix-ui/react-avatar";
 import { Avatar } from "../ui/avatar";
 import { DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator } from "../ui/dropdown-menu";
-import { logoutUser } from "@/store/auth-slice";
+import { logoutUser, resetTokenAndCredentials } from "@/store/auth-slice";
 import UserCartWrapper from "./cart-wrapper";
 import { useEffect, useState } from "react";
 import { fetchCartItems } from "@/store/shop/cart-slice";
@@ -58,7 +58,10 @@ function HeaderRightContent() {
   const dispatch = useDispatch();
 
   function handleLogout() {
-    dispatch(logoutUser());
+    // dispatch(logoutUser());
+    dispatch(resetTokenAndCredentials());
+    sessionStorage.clear();
+    navigate('/auth/login');
   }
 
   useEffect(() => {
